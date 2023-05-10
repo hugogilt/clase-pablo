@@ -3,7 +3,7 @@ name: Construir y Lanzar
 on:
   push:
     branches:
-      - main:
+      - main
 
 jobs:
   construir-y-lanzar:
