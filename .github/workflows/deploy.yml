@@ -1,0 +1,30 @@
+name: Construir y Lanzar
+
+on:
+  push:
+    branches:
+      - main:
+
+jobs:
+  construir-y-lanzar:
+    runs-on: ubuntu-latest #Crea una máquina virtual ubuntu
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3 #Copia el repositorio en la maquina ubuntu
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3 #Instala node en la maquina virtual
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm ci #Es como hacer el npm install
+
+    - name: Build project
+      run: npm run build #Compila el projecto en la carpeta build de forma que lo lea el navegador
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        branch: gh-pages
+        folder: dist #Manda la carpeta dist a gh-pages
